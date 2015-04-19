@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: rssletter_development
+
+test:
+  <<: *default
+  database: rssletter_test
+
+production:
+  <<: *default
+  database: rssletter_production
+  username: rssletter
+  password: <%= ENV['RSSLETTER_DATABASE_PASSWORD'] %>
+
