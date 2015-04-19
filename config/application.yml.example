@@ -1,0 +1,17 @@
+common: &common
+  mail:
+    retriever_method: imap
+    username: username@gmail.com
+    password: password
+    address: imap.gmail.com
+    port: 993
+    enable_ssl: true
+
+development:
+  <<: *common
+
+production:
+  <<: *common
+
+test:
+  <<: *common
