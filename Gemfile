@@ -8,4 +8,6 @@ gem 'pg'
 
 group :test do
   gem 'rspec'
+  gem 'factory_girl'
+  gem 'database_cleaner'
 end

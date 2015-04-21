@@ -16,7 +16,10 @@ GEM
       tzinfo (~> 1.1)
     arel (6.0.0)
     builder (3.2.2)
+    database_cleaner (1.4.1)
     diff-lcs (1.2.5)
+    factory_girl (4.5.0)
+      activesupport (>= 3.0.0)
     i18n (0.7.0)
     json (1.8.2)
     mail (2.6.3)
@@ -57,6 +60,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  database_cleaner
+  factory_girl
   mail
   pg
   require_all
