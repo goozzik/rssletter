@@ -11,14 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150419150902) do
+ActiveRecord::Schema.define(version: 20150419152814) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "newsletters", force: :cascade do |t|
+    t.string   "name"
+    t.string   "domain"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "rss_items", force: :cascade do |t|
     t.string   "subject"
     t.text     "body"
+    t.integer  "newsletter_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
