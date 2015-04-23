@@ -1,7 +1,8 @@
 FactoryGirl.define do
 
   factory :rss_item, class: RSSItem do
-    subject 'Test'
+    title 'Test'
+    content 'content'
     newsletter
   end
 
