@@ -5,6 +5,7 @@ require_all File.expand_path('../factories/*.rb', __FILE__)
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
+  config.include Rack::Test::Methods
 
   config.before(:suite) do
     DatabaseCleaner.clean
@@ -17,5 +18,4 @@ RSpec.configure do |config|
   config.after(:each) do |example|
     DatabaseCleaner.clean
   end
-
 end
