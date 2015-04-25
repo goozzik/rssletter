@@ -1,5 +1,5 @@
 class RSSItem < ActiveRecord::Base
 
-  belongs_to :newsletter
+  belongs_to :newsletter, touch: true
 
 end
