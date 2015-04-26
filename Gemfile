@@ -5,6 +5,7 @@ gem 'mail'
 gem 'sinatra'
 gem 'sinatra-activerecord'
 gem 'pg'
+gem 'haml'
 
 group :test do
   gem 'rspec'
