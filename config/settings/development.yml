@@ -1,0 +1,9 @@
+mail:
+  retriever_method: imap
+  #user_name: jakub.gorzelak@gmail.com
+  user_name: jack.sparrow000000007@gmail.com
+  #password: 'mickroos135'
+  password: '#9mMh&HesLHD*ak4Z6zj'
+  address: imap.gmail.com
+  port: 993
+  enable_ssl: true

@@ -1,0 +1,7 @@
+mail:
+  retriever_method: imap
+  user_name: username@gmail.com
+  password: password
+  address: imap.gmail.com
+  port: 993
+  enable_ssl: true
