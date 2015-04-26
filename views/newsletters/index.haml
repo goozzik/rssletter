@@ -1,0 +1,4 @@
+%h1 Newsletters
+- newsletters.each do |newsletter|
+  %a{href: "/newsletter/#{newsletter.id}"}= newsletter.title
+
