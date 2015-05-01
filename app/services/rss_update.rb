@@ -1,5 +1,4 @@
-class RSSUpdateService
-
+class RSSUpdate
   def update
     mails.each { |mail| process_mail(mail) }
   end
@@ -57,5 +56,4 @@ class RSSUpdateService
   def mail_part_is_html?(part_content_type)
     !!part_content_type.match(/^text\/html/)
   end
-
 end

@@ -1,5 +1,4 @@
 class NewslettersController < ApplicationController
-
   def index
     set_newsletters
   end
@@ -18,6 +17,4 @@ class NewslettersController < ApplicationController
   def set_newsletters
     @newsletters ||= Newsletter.all
   end
-
 end
-

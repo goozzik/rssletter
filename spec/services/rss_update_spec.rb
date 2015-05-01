@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe RSSUpdateService do
+describe RSSUpdate do
   let!(:newsletter) do
     FactoryGirl.create(:newsletter)
   end
