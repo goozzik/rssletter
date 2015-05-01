@@ -31,15 +31,15 @@ describe RSSUpdate do
         end
 
         context 'and this mail was already converted to RSS item' do
-          let!(:rss_item) do
+          let!(:newsletter_item) do
             FactoryGirl.create(
-              :rss_item, newsletter: newsletter, title: mail.subject
+              :newsletter_item, newsletter: newsletter, title: mail.subject
             )
           end
 
           it 'does not create RSS item' do
             expect { subject.update }.to_not change {
-              RSSItem.count
+              NewsletterItem.count
             }
           end
         end
@@ -47,19 +47,19 @@ describe RSSUpdate do
         context 'and this mail was not yet converted to RSS item' do
           it 'creates RSS item' do
             expect { subject.update }.to change {
-              newsletter.rss_items.count
+              newsletter.items.count
             }.by(1)
 
-            rss_item = newsletter.rss_items.last
-            expect(rss_item.title).to eq(mail.subject)
+            newsletter_item = newsletter.items.last
+            expect(newsletter_item.title).to eq(mail.subject)
           end
 
           context 'and there is only one format of mail body' do
             it 'assigns raw source of mail body as RSS item content' do
               subject.update
 
-              rss_item = newsletter.rss_items.last
-              expect(rss_item.content).to eq(mail.body.to_s)
+              newsletter_item = newsletter.items.last
+              expect(newsletter_item.content).to eq(mail.body.to_s)
             end
           end
 
@@ -89,8 +89,8 @@ describe RSSUpdate do
             it 'assigns text/html format of mail body as RSS item content' do
               subject.update
 
-              rss_item = newsletter.rss_items.last
-              expect(rss_item.content).to eq(mail_html_body_part.body.to_s)
+              newsletter_item = newsletter.items.last
+              expect(newsletter_item.content).to eq(mail_html_body_part.body.to_s)
             end
           end
         end
@@ -107,7 +107,7 @@ describe RSSUpdate do
 
         it 'does not create RSS item' do
           expect { subject.update }.to_not change {
-            RSSItem.count
+            NewsletterItem.count
           }
         end
       end

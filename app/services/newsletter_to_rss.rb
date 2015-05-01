@@ -12,7 +12,7 @@ class NewsletterToRSS
       maker.channel.id = newsletter.id.to_s
       maker.channel.updated = newsletter.updated_at.to_s
 
-      newsletter.rss_items.each do |rss_item|
+      newsletter.items.each do |rss_item|
         maker.items.new_item do |item|
           item.id = rss_item.id.to_s
           item.description = rss_item.content

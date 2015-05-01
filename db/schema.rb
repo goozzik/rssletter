@@ -16,18 +16,18 @@ ActiveRecord::Schema.define(version: 20150419152814) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "newsletters", force: :cascade do |t|
+  create_table "newsletter_items", force: :cascade do |t|
     t.string   "title"
-    t.string   "domain"
-    t.string   "email"
+    t.text     "content"
+    t.integer  "newsletter_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "rss_items", force: :cascade do |t|
+  create_table "newsletters", force: :cascade do |t|
     t.string   "title"
-    t.text     "content"
-    t.integer  "newsletter_id"
+    t.string   "domain"
+    t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

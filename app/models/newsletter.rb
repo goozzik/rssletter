@@ -1,3 +1,3 @@
 class Newsletter < ActiveRecord::Base
-  has_many :rss_items, dependent: :destroy, class_name: 'RSSItem'
+  has_many :items, dependent: :destroy, class_name: 'NewsletterItem'
 end

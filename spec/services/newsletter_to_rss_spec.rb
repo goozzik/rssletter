@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe NewsletterToRSS do
   let(:newsletter) { FactoryGirl.create(:newsletter) }
-  let(:rss_item) { FactoryGirl.create(:rss_item, newsletter: newsletter) }
+  let(:newsletter_item) { FactoryGirl.create(:newsletter_item, newsletter: newsletter) }
   let(:utc_offset) { (Time.now.utc_offset / 3600).to_s }
 
   subject { described_class.new(newsletter) }
@@ -10,7 +10,7 @@ describe NewsletterToRSS do
   describe '#to_rss' do
     before do
       Timecop.freeze(Time.local(1990))
-      rss_item
+      newsletter_item
     end
 
     after do
@@ -29,9 +29,9 @@ describe NewsletterToRSS do
         "  <title>#{newsletter.title}</title>\n"\
         "  <updated>1989-12-31T23:00:00Z</updated>\n"\
         "  <entry>\n"\
-        "    <id>#{rss_item.id}</id>\n"\
-        "    <summary>#{rss_item.content}</summary>\n"\
-        "    <title>#{rss_item.title}</title>\n"\
+        "    <id>#{newsletter_item.id}</id>\n"\
+        "    <summary>#{newsletter_item.content}</summary>\n"\
+        "    <title>#{newsletter_item.title}</title>\n"\
         "    <updated>1989-12-31T23:00:00Z</updated>\n"\
         "    <dc:date>1989-12-31T23:00:00Z</dc:date>\n"\
         "  </entry>\n"\

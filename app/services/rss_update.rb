@@ -14,7 +14,7 @@ class RSSUpdate
     return unless newsletter
 
     unless mail_already_coverted?(newsletter, mail)
-      create_rss_item(newsletter, mail)
+      create_newsletter_item(newsletter, mail)
     end
   end
 
@@ -27,11 +27,11 @@ class RSSUpdate
   end
 
   def mail_already_coverted?(newsletter, mail)
-    newsletter.rss_items.where(title: mail.subject).exists?
+    newsletter.items.where(title: mail.subject).exists?
   end
 
-  def create_rss_item(newsletter, mail)
-    newsletter.rss_items.create(
+  def create_newsletter_item(newsletter, mail)
+    newsletter.items.create(
       title: mail.subject, content: get_content_from_mail(mail)
     )
   end

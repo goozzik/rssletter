@@ -1,7 +1,6 @@
-class CreateRssItems < ActiveRecord::Migration
-
+class CreateNewsletterItems < ActiveRecord::Migration
   def change
-    create_table :rss_items do |t|
+    create_table :newsletter_items do |t|
       t.string :title
       t.text :content
       t.integer :newsletter_id
@@ -9,5 +8,4 @@ class CreateRssItems < ActiveRecord::Migration
       t.timestamps
     end
   end
-
 end
