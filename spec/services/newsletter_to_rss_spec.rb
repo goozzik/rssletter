@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-describe Newsletter do
+describe NewsletterToRSS do
   let(:newsletter) { FactoryGirl.create(:newsletter) }
   let(:rss_item) { FactoryGirl.create(:rss_item, newsletter: newsletter) }
   let(:utc_offset) { (Time.now.utc_offset / 3600).to_s }
 
-  subject { newsletter }
+  subject { described_class.new(newsletter) }
 
   describe '#to_rss' do
     before do
@@ -27,7 +27,7 @@ describe Newsletter do
         "  </author>\n"\
         "  <id>#{newsletter.id}</id>\n"\
         "  <title>#{newsletter.title}</title>\n"\
-        "  <updated>1990-01-01T00:00:00+01:00</updated>\n"\
+        "  <updated>1989-12-31T23:00:00Z</updated>\n"\
         "  <entry>\n"\
         "    <id>#{rss_item.id}</id>\n"\
         "    <summary>#{rss_item.content}</summary>\n"\
@@ -35,10 +35,9 @@ describe Newsletter do
         "    <updated>1989-12-31T23:00:00Z</updated>\n"\
         "    <dc:date>1989-12-31T23:00:00Z</dc:date>\n"\
         "  </entry>\n"\
-        "  <dc:date>1990-01-01T00:00:00+01:00</dc:date>\n"\
+        "  <dc:date>1989-12-31T23:00:00Z</dc:date>\n"\
         "</feed>"
       )
     end
   end
 end
-

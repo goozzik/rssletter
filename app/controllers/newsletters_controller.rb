@@ -6,7 +6,7 @@ class NewslettersController < ApplicationController
 
   def show
     set_newsletter
-    render layout: false
+    render body: NewsletterToRSS.new(@newsletter).to_rss, layout: false
   end
 
   private

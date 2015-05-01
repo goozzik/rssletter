@@ -26,8 +26,13 @@ describe NewslettersController do
   # GET /newsletters/:id
   describe '#show' do
     context 'when there is newsletter with given id' do
+      let(:newsletter_to_rss) do
+        instance_double('NewsletterToRSS', to_rss: 'test')
+      end
       before do
-        allow_any_instance_of(Newsletter).to receive(:to_rss).and_return('test')
+        allow(NewsletterToRSS).to receive(:new).with(
+          newsletter
+        ).and_return(newsletter_to_rss)
         get :show, id: newsletter.id
       end
 
@@ -36,7 +41,7 @@ describe NewslettersController do
       end
 
       it 'returns converted to RSS newsletter in body' do
-        expect(response.body).to eq("#{newsletter.to_rss}\n")
+        expect(response.body).to eq("#{newsletter_to_rss.to_rss}")
       end
     end
   end
