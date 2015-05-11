@@ -100,4 +100,23 @@ describe NewslettersController do
       end
     end
   end
+
+  # POST /newsletters
+  describe '#destroy' do
+    let!(:newsletter) { FactoryGirl.create(:newsletter) }
+
+    it 'destroys newsletter' do
+      expect {
+        delete :destroy, id: newsletter.id
+      }.to change { Newsletter.count }.by(-1)
+    end
+
+    it 'redirects to index page' do
+      expect(
+        delete :destroy, id: newsletter.id
+      ).to redirect_to('/newsletters')
+
+      expect(response.status).to eq(302)
+    end
+  end
 end

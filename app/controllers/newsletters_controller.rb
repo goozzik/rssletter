@@ -1,5 +1,5 @@
 class NewslettersController < ApplicationController
-  before_filter :set_newsletter, only: [:new, :show]
+  before_filter :set_newsletter, only: [:new, :show, :create, :destroy]
 
   def index
     set_newsletters
@@ -13,12 +13,16 @@ class NewslettersController < ApplicationController
   def new; end
 
   def create
-    @newsletter = Newsletter.new(newsletter_params)
     if @newsletter.save
       redirect_to action: :index
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @newsletter.destroy
+    redirect_to action: :index
   end
 
   private
@@ -27,7 +31,7 @@ class NewslettersController < ApplicationController
     @newsletter ||= if params[:id].present?
       Newsletter.find(params[:id])
     else
-      Newsletter.new
+      Newsletter.new(params[:newsletter].present? ? newsletter_params : {})
     end
   end
 

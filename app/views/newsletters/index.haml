@@ -1,5 +1,9 @@
 %h1 Newsletters
 - @newsletters.each do |newsletter|
-  %a{href: "/newsletter/#{newsletter.id}"}= newsletter.title
+  %span
+    %a{href: "/newsletter/#{newsletter.id}"}= newsletter.title
+    |
+    = link_to 'Delete', newsletter, method: :delete
+  %br
 
 %a{href: "/newsletters/new"} Add new newsletter
