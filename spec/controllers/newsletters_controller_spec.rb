@@ -49,9 +49,55 @@ describe NewslettersController do
   # GET /newsletters/new
   describe '#new' do
     it 'returns success response' do
-      get :show
+      get :new
 
       expect(response.status).to eq(200)
+    end
+  end
+
+  # POST /newsletters
+  describe '#create' do
+    let(:newsletter_params) do
+      {
+        title: 'Newsletter',
+        email: 'newsletter@gmail.com',
+        domain: 'newsletter.com'
+      }
+    end
+
+    context 'when newsletter params are valid' do
+      it 'redirects to index page' do
+        expect(
+          post :create, newsletter_params
+        ).to redirect_to('/newsletters')
+
+        expect(response.status).to eq(302)
+      end
+
+      it 'creates new newsletter' do
+        expect { post :create, newsletter_params }.to change {
+          Newsletter.count
+        }.by(1)
+      end
+    end
+
+    context 'when newsletter params are invalid' do
+      before do
+        allow_any_instance_of(Newsletter).to receive(:save) { false }
+      end
+
+      it 'renders new partial' do
+        expect(
+          post :create, newsletter_params
+        ).to render_template('new')
+        expect(response.status).to eq(422)
+      end
+
+      it 'does not create new newsletter' do
+        expect { post :create, newsletter_params }.to_not change {
+          Newsletter.count
+        }
+      end
     end
   end
 end

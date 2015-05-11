@@ -12,6 +12,15 @@ class NewslettersController < ApplicationController
 
   def new; end
 
+  def create
+    @newsletter = Newsletter.new(newsletter_params)
+    if @newsletter.save
+      redirect_to action: :index
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def set_newsletter
@@ -24,5 +33,9 @@ class NewslettersController < ApplicationController
 
   def set_newsletters
     @newsletters ||= Newsletter.all
+  end
+
+  def newsletter_params
+    params[:newsletter].permit(:title, :domain, :email)
   end
 end
