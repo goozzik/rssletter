@@ -1,0 +1,11 @@
+= form_for @newsletter do |f|
+  = f.label :title
+  = f.text_field :title
+  %br
+  = f.label :domain
+  = f.text_field :domain
+  %br
+  = f.label :email
+  = f.text_field :email
+  %br
+  = f.submit 'Add'

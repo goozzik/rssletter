@@ -45,4 +45,13 @@ describe NewslettersController do
       end
     end
   end
+
+  # GET /newsletters/new
+  describe '#new' do
+    it 'returns success response' do
+      get :show
+
+      expect(response.status).to eq(200)
+    end
+  end
 end
