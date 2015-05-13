@@ -1,13 +1,16 @@
 class NewslettersController < ApplicationController
-  before_filter :set_newsletter, only: [:new, :show, :create, :destroy]
+  before_filter :set_newsletter, only: [:new, :create, :destroy]
 
   def index
     set_newsletters
   end
 
   def show
-    set_newsletter
-    render body: NewsletterToRSS.new(@newsletter).to_rss, layout: false
+    if newsletter = Newsletter.find_by(hash_id: params[:id])
+      render body: NewsletterToRSS.new(newsletter).to_rss, layout: false
+    else
+      render body: '', status: 404, layout: false
+    end
   end
 
   def new; end

@@ -25,7 +25,7 @@ describe NewslettersController do
 
   # GET /newsletters/:id
   describe '#show' do
-    context 'when there is newsletter with given id' do
+    context 'when there is newsletter with given hash_id' do
       let(:newsletter_to_rss) do
         instance_double('NewsletterToRSS', to_rss: 'test')
       end
@@ -33,7 +33,7 @@ describe NewslettersController do
         allow(NewsletterToRSS).to receive(:new).with(
           newsletter
         ).and_return(newsletter_to_rss)
-        get :show, id: newsletter.id
+        get :show, id: newsletter.hash_id
       end
 
       it 'returns 200 response code' do
@@ -42,6 +42,16 @@ describe NewslettersController do
 
       it 'returns converted to RSS newsletter in body' do
         expect(response.body).to eq("#{newsletter_to_rss.to_rss}")
+      end
+    end
+
+    context 'when there is no newsletter with given hash_id' do
+      let(:hash_id) { '123123123123' }
+
+      it 'returns 404 response code' do
+        get :show, id: hash_id
+
+        expect(response.status).to eq(404)
       end
     end
   end
