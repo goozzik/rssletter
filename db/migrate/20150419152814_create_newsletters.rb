@@ -4,6 +4,7 @@ class CreateNewsletters < ActiveRecord::Migration
       t.string :title
       t.string :domain
       t.string :email
+      t.string :hash_id
 
       t.timestamps
     end

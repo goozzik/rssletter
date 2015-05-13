@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20150419152814) do
     t.string   "title"
     t.string   "domain"
     t.string   "email"
+    t.string   "hash_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
