@@ -7,7 +7,12 @@ describe NewslettersController do
   # GET /newsletters
   describe '#index' do
     let!(:newsletter_2) { FactoryGirl.create(:newsletter) }
-    before { get :index }
+    before do
+      user = Settings.credentials.username
+      pw = Settings.credentials.password
+      request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials(user,pw)
+      get :index
+    end
 
     it 'returns 200 response code' do
       expect(response.status).to eq(200)

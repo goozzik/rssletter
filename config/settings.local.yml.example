@@ -5,3 +5,6 @@ mail:
   address: imap.gmail.com
   port: 993
   enable_ssl: true
+credentials:
+  username: xxx
+  password: xxx

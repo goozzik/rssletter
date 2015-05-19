@@ -1,5 +1,10 @@
 class NewslettersController < ApplicationController
   before_filter :set_newsletter, only: [:new, :create, :destroy]
+  http_basic_authenticate_with(
+    name: Settings.credentials.username,
+    password: Settings.credentials.password,
+    only: :index
+  )
 
   def index
     set_newsletters
