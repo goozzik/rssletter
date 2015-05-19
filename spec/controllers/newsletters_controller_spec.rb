@@ -4,15 +4,17 @@ describe NewslettersController do
   render_views
   let!(:newsletter) { FactoryGirl.create(:newsletter) }
 
+  before do
+    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials(
+      Settings.credentials.username,
+      Settings.credentials.password
+    )
+  end
+
   # GET /newsletters
   describe '#index' do
     let!(:newsletter_2) { FactoryGirl.create(:newsletter) }
-    before do
-      user = Settings.credentials.username
-      pw = Settings.credentials.password
-      request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials(user,pw)
-      get :index
-    end
+    before { get :index }
 
     it 'returns 200 response code' do
       expect(response.status).to eq(200)

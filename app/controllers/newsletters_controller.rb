@@ -3,7 +3,7 @@ class NewslettersController < ApplicationController
   http_basic_authenticate_with(
     name: Settings.credentials.username,
     password: Settings.credentials.password,
-    only: :index
+    only: [:index, :create, :destroy]
   )
 
   def index
