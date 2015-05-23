@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   #   resources :products
   #
   resources :newsletters
+  namespace :api do
+    post 'mailgun/new_mail' => 'mailgun#new_mail'
+  end
 
   # Example resource route with options:
   #   resources :products do
