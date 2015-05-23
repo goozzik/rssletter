@@ -1,9 +1,12 @@
 mail:
   retriever_method: imap
-  #user_name: jakub.gorzelak@gmail.com
-  user_name: jack.sparrow000000007@gmail.com
-  #password: 'mickroos135'
-  password: '#9mMh&HesLHD*ak4Z6zj'
+  user_name: username@gmail.com
+  password: password
   address: imap.gmail.com
   port: 993
   enable_ssl: true
+credentials:
+  username: xxx
+  password: xxx
+mailgun:
+  mailgun: mailgun_api_key

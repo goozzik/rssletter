@@ -8,3 +8,5 @@ mail:
 credentials:
   username: xxx
   password: xxx
+mailgun:
+  mailgun: mailgun_api_key
