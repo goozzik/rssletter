@@ -41,10 +41,25 @@ describe Api::MailgunController do
 
   # POST /api/mailgun/new_mail
   describe '#new_mail' do
-    let(:params) { authentication_params }
-
     subject { post :new_mail, params}
 
+    let(:params) { authentication_params }
+    let(:mail_processor_service) do
+      instance_double('Mailgun::MailProcessorService', process: true)
+    end
+
+    before do
+      allow(Mailgun::MailProcessorService).to receive(:new).with(
+        params
+      ).and_return(mail_processor_service)
+    end
+
     it_behaves_like 'authentication required action'
+
+    it 'calls Mailgun::MailProcessorService' do
+      expect(mail_processor_service).to receive(:process)
+
+      subject
+    end
   end
 end

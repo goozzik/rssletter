@@ -4,6 +4,7 @@ class Api::MailgunController < ApplicationController
 
   # POST /api/mailgun/new_mail
   def new_mail
+    Mailgun::MailProcessorService.new(mail_params).process
     render body: '', status: 200
   end
 
@@ -17,5 +18,9 @@ class Api::MailgunController < ApplicationController
     Mailgun::AuthenticationService.new(
       params[:token], params[:timestamp], params[:signature]
     )
+  end
+
+  def mail_params
+    params.except(:action, :controller)
   end
 end
