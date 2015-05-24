@@ -9,4 +9,4 @@ credentials:
   username: xxx
   password: xxx
 mailgun:
-  mailgun: mailgun_api_key
+  api_key: api_key
