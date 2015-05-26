@@ -13,6 +13,20 @@ describe Mailgun::MailProcessorService do
         )
       end
 
+      it 'calls Newsletters::SubscriptionConfirmationService#confirm' do
+        expect(Newsletters::SubscriptionConfirmationService).to receive(
+          :new
+        ).with(params['from'], params['body-html']).and_return(
+          service = instance_double(
+            'Newsletters::SubscriptionConfirmationService',
+            confirm: true
+          )
+        )
+        expect(service).to receive(:confirm)
+
+        subject.process
+      end
+
       it 'returns nil' do
         expect(subject.process).to be_nil
       end

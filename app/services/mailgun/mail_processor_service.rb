@@ -5,7 +5,10 @@ module Mailgun
     end
 
     def process
-      return if not_newsletter_mail?
+      if not_newsletter_mail?
+        confirm_subscription
+        return
+      end
 
       @newsletter = create_or_find_newsletter
       create_newsletter_item
@@ -30,6 +33,12 @@ module Mailgun
         title: params['subject'],
         content: params['body-html']
       )
+    end
+
+    def confirm_subscription
+      Newsletters::SubscriptionConfirmationService.new(
+        params['from'], params['body-html']
+      ).confirm
     end
   end
 end
