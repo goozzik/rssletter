@@ -2,6 +2,8 @@ class Newsletter < ActiveRecord::Base
   has_many :items, dependent: :destroy, class_name: 'NewsletterItem'
   before_create :set_hash_id
 
+  serialize :confirmation_urls
+
   private
 
   def set_hash_id
