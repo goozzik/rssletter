@@ -39,5 +39,20 @@ describe NewsletterToRSS do
         "</feed>"
       )
     end
+
+    context 'when given newsletter does not have title' do
+      before { allow(newsletter).to receive(:title) { nil } }
+
+      it 'uses newsletter email as RSS title and author' do
+        rss_xml = Nokogiri::XML(subject.to_rss)
+
+        expect(rss_xml.xpath("//xmlns:title").first.content).to eq(
+          newsletter.email
+        )
+        expect(rss_xml.xpath("//xmlns:author/xmlns:name").first.content).to eq(
+          newsletter.email
+        )
+      end
+    end
   end
 end

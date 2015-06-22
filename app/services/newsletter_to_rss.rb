@@ -7,8 +7,8 @@ class NewsletterToRSS
 
   def to_rss
     RSS::Maker.make('atom') do |maker|
-      maker.channel.title = newsletter.title
-      maker.channel.author = newsletter.title
+      maker.channel.title = title
+      maker.channel.author = author
       maker.channel.id = newsletter.id.to_s
       maker.channel.updated = newsletter.updated_at.to_s
 
@@ -26,4 +26,16 @@ class NewsletterToRSS
   private
 
   attr_accessor :newsletter
+
+  def title
+    return newsletter.title if newsletter.title.present?
+
+    newsletter.email
+  end
+
+  def author
+    return newsletter.title if newsletter.title.present?
+
+    newsletter.email
+  end
 end
